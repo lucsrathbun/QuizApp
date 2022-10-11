@@ -3,6 +3,8 @@ package com.example.quizapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -12,12 +14,25 @@ class MainActivity : AppCompatActivity() {
         val TAG = "MainActivity"
     }
     private lateinit var quiz: Quiz
+    private lateinit var score: TextView
+    private lateinit var buttonFalse: Button
+    private lateinit var buttonTrue: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         importQuestions()
+        wireWidgets()
+
 
         //get the first questions, set up the textviews, set up the onclicklisteners for the buttons
+        val scoreText = getString(R.string.main_score)
+        score.text = "$scoreText ${quiz.totalScore}"
+    }
+
+    private fun wireWidgets() {
+        score = findViewById(R.id.textView_main_score)
+        buttonFalse = findViewById(R.id.button_main_false)
+        buttonTrue = findViewById(R.id.button_main_true)
     }
 
     private fun importQuestions() {

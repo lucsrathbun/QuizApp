@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_false">Falsch</string>
+    <string name="main_score">Punktzahl</string>
+    <string name="main_true">Treu</string>
+</resources>
