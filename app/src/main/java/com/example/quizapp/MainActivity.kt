@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         //get the first questions, set up the textviews, set up the onclicklisteners for the buttons
         val scoreText = getString(R.string.main_score)
-        score.text = "$scoreText ${quiz.totalScore}" + "/" + questions.size
+        score.text = "$scoreText ${quiz.totalScore}"
         printQuestion.text = questions[quiz.giveIndex()].question
         buttonTrue.setOnClickListener {
             quiz.start(buttonTrue, printQuestion, score, buttonFalse, scoreText)

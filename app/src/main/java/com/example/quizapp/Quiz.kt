@@ -9,19 +9,23 @@ class Quiz(val questions: List<Questions>) {
     var totalScore = 0
     var questionsLeft = questions.size
     var index = 0
+    var currentQuestion = 0
+
 
     fun start(button: Button, displayQuestion: TextView, showScore: TextView, button2: Button, scoreText: String)
     {
 
+
             if (checkAnswer(button)) {
                 totalScore++
-                showScore.text = "$scoreText ${totalScore}" + "/" + questions.size
+                showScore.text = "$scoreText ${totalScore}"
 
             }
+            currentQuestion++
             questionsLeft--
             if(questionsLeft <= 0) {
                 endScore(button, displayQuestion, button2)
-                showScore.text = "Your final score is " + totalScore + "/" + questions.size
+                showScore.text = "Your final score is " + totalScore + "/" + currentQuestion
             }
             else {
                 index++
