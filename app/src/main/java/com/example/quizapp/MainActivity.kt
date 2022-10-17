@@ -15,27 +15,40 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var quiz: Quiz
     private lateinit var score: TextView
-    private lateinit var buttonFalse: Button
-    private lateinit var buttonTrue: Button
+    public lateinit var buttonFalse: Button
+    public lateinit var buttonTrue: Button
+    private lateinit var printQuestion: TextView
+    private lateinit var questions: List<Questions>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         importQuestions()
         wireWidgets()
+        //create the quiz object from the list of questions
+        quiz = Quiz(questions)
 
 
         //get the first questions, set up the textviews, set up the onclicklisteners for the buttons
         val scoreText = getString(R.string.main_score)
-        score.text = "$scoreText ${quiz.totalScore}"
+        score.text = "$scoreText ${quiz.totalScore}" + "/" + questions.size
+        printQuestion.text = questions[quiz.giveIndex()].question
+        buttonTrue.setOnClickListener {
+            quiz.start(buttonTrue, printQuestion, score, buttonFalse, scoreText)
+
+        }
+        buttonFalse.setOnClickListener {
+            quiz.start(buttonFalse, printQuestion, score, buttonTrue, scoreText)
+        }
     }
 
     private fun wireWidgets() {
         score = findViewById(R.id.textView_main_score)
         buttonFalse = findViewById(R.id.button_main_false)
         buttonTrue = findViewById(R.id.button_main_true)
+        printQuestion = findViewById(R.id.textView_main_question)
     }
 
-    private fun importQuestions() {
+    private fun importQuestions(){
         // step 1: open the raw resource as an InputStream
         // R.raw.questions --> R is the Resources class, raw is folder,
         // questions is the file
@@ -54,12 +67,12 @@ class MainActivity : AppCompatActivity() {
         // typetoken tells gson it will be a List<Question>
 
         val type = object : TypeToken<List<Questions>>() { }.type
-        val questions = gson.fromJson<List<Questions>>(jsonString, type)
+        questions = gson.fromJson<List<Questions>>(jsonString, type)
 
         Log.d(TAG, "onCreate: $questions")
 
-        //create the quiz object from the list of questions
-        quiz = Quiz(questions)
     }
+
+
 
 }

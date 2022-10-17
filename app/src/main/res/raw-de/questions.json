@@ -1,14 +1,14 @@
 [
   {
     "question": "Does 5+2=7?",
-    "answer": "True"
+    "answer": "Treu"
   },
   {
     "question": "Does Ryan?",
-    "answer": "True"
+    "answer": "Treu"
   },
   {
     "question": "Who was in Paris?",
-    "answer": "False"
+    "answer": "Falsch"
   }
 ]
